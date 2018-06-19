@@ -59,10 +59,14 @@ export default class ViroSample extends Component {
   // Replace this function with the contents of _getVRNavigator() or _getARNavigator()
   // if you are building a specific type of experience.
   render() {
+    <Image
+      style={{ alignSelf: 'center', width: 150, height: 70 }}
+      source={require('./js/res/MovieMarkerLogo.png')}
+    />
     if (this.state.navigatorType == UNSET) {
       return this._getExperienceSelector();
-    } else if (this.state.navigatorType == VR_NAVIGATOR_TYPE) {
-      return this._getVRNavigator();
+    // } else if (this.state.navigatorType == VR_NAVIGATOR_TYPE) {
+      // return this._getVRNavigator();
     } else if (this.state.navigatorType == AR_NAVIGATOR_TYPE) {
       return this._getARNavigator();
     }
@@ -108,7 +112,7 @@ export default class ViroSample extends Component {
   _getVRNavigator() {
     return (
       <ViroVRSceneNavigator {...this.state.sharedProps}
-        initialScene={{scene: InitialVRScene}} onExitViro={this._exitViro}/>
+        initialScene={{scene: InitialVRScene}} onExitViro={this._exitViro} />
     );
   }
 
