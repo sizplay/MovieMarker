@@ -20,61 +20,40 @@ export default class HelloWorldSceneAR extends Component {
     // Set initial state here
     this.state = {
       text: "Initializing mARco...",
-      lat: '',
-      lng: ''
+      points: []
     };
 
     // bind 'this' to functions
     this._onInitialized = this._onInitialized.bind(this);
-    this.getLocation = this.getLocation.bind(this);
   }
 
-  getLocation() {
+  _onInitialized(state) {
     const success = (pos) => {
-      var crd = pos.coords;
-      this.setState({ lat: crd.latitude, lng: crd.longitude });
+      const crd = pos.coords;
+      const latitude = crd.latitude.toFixed(6);
+      const longitude = crd.longitude.toFixed(6);
+      fetch(`https://api.tomtom.com/search/2/nearbySearch/.JSON?key=X00cnasclWOj31PE35FcEmTYJO7TEAYl&lat=${latitude}&lon=${longitude}&radius=100`)
+        .then(result => {
+          return result.json();
+        })
+        .then(data => {
+          this.setState({ text: data.results[0].poi.name, points: data.results });
+        });
     };
+
     const options = {
       enableHighAccuracy: true,
       timeout: 5000,
       maximumAge: 0
     };
-    function error(err) {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
-    }
-    navigator.geolocation.getCurrentPosition(success, error, options);
-  }
 
-  _onInitialized(state, reason) {
-    const success = (pos) => {
-      var crd = pos.coords;
-      this.setState({ text: `Longitude: ${crd.longitude}` });
-      console.log('Your current position is:');
-      console.log(`Latitude : ${crd.latitude}`);
-      console.log(`Longitude: ${crd.longitude}`);
-      console.log(`More or less ${crd.accuracy} meters.`);
-    };
-    const options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    };
     function error(err) {
       console.warn(`ERROR(${err.code}): ${err.message}`);
     }
 
     if (state == ViroConstants.TRACKING_NORMAL) {
-      fetch('https://api.tomtom.com/search/2/nearbySearch/.JSON?key=X00cnasclWOj31PE35FcEmTYJO7TEAYl&lat=40.728157&lon=-73.957797&radius=1000')
-        .then(result => {
-          return result.json();
-        })
-        .then(data => {
-          this.setState({ text: data.results[1].poi.name });
-        });
-      //navigator.geolocation.getCurrentPosition(success, error, options);
-      // this.setState({
-      //   text : "Hello Marco!"
-      // });
+
+      navigator.geolocation.getCurrentPosition(success, error, options);
     } else if (state == ViroConstants.TRACKING_NONE) {
       // Handle loss of tracking
     }
@@ -85,7 +64,10 @@ export default class HelloWorldSceneAR extends Component {
   render() {
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized} >
-        <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} />
+        {
+          this.state.points.map((point, index) => <ViroText key={point.id} text={point.poi.name} scale={[.5, .5, .5]} position={[0, 0, index]} style={styles.helloWorldTextStyle} />)
+        }
+        <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, -2, -2]} style={styles.helloWorldTextStyle} />
         <ViroImage
           position={[0, .5, -2]}
           height={2}
