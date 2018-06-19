@@ -64,7 +64,14 @@ export default class HelloWorldSceneAR extends Component {
     }
 
     if (state == ViroConstants.TRACKING_NORMAL) {
-      navigator.geolocation.getCurrentPosition(success, error, options);
+      fetch('https://api.tomtom.com/search/2/nearbySearch/.JSON?key=X00cnasclWOj31PE35FcEmTYJO7TEAYl&lat=40.728157&lon=-73.957797&radius=1000')
+        .then(result => {
+          return result.json();
+        })
+        .then(data => {
+          this.setState({ text: data.results[1].poi.name });
+        });
+      //navigator.geolocation.getCurrentPosition(success, error, options);
       // this.setState({
       //   text : "Hello Marco!"
       // });
@@ -80,12 +87,18 @@ export default class HelloWorldSceneAR extends Component {
       <ViroARScene onTrackingUpdated={this._onInitialized} >
         <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} />
         <ViroImage
-            position={[0, 1, -1]}
-            height={2}
-            width={2}
-            placeholderSource={require("./res/guadalupe_360.jpg")}
-            //source={require("./res/guadalupe_360.jpg")}
-            source={require("./res/MovieMarkerLogo.png")}
+          position={[0, .5, -2]}
+          height={2}
+          width={2}
+          placeholderSource={require("./res/MovieMarkerLogo.png")}
+          source={require("./res/MovieMarkerLogo.png")}
+        />
+        <ViroImage
+          position={[2, 1, -2]}
+          height={2}
+          width={2}
+          placeholderSource={require("./res/StayPuff.jpg")}
+          source={require("./res/StayPuff.jpg")}
         />
       </ViroARScene>
     );
