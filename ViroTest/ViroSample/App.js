@@ -60,10 +60,7 @@ export default class ViroSample extends Component {
   // Replace this function with the contents of _getVRNavigator() or _getARNavigator()
   // if you are building a specific type of experience.
   render() {
-    <Image
-      style={{ alignSelf: 'center', width: 150, height: 70 }}
-      source={require('./js/res/MovieMarkerLogo.png')}
-    />
+
     if (this.state.navigatorType == UNSET) {
       return this._getExperienceSelector();
     // } else if (this.state.navigatorType == VR_NAVIGATOR_TYPE) {
@@ -79,23 +76,23 @@ export default class ViroSample extends Component {
       <View style={localStyles.outer} >
         <View style={localStyles.inner} >
 
-          <Text style={localStyles.titleText}>
-            Choose your desired experience:
-          </Text>
-
+          <Image
+      style={{ alignSelf: 'center', width: 250, height: 180, marginBottom: 0 }}
+      source={require('./js/res/MovieMarkerLogo.png')}
+    />
           <TouchableHighlight style={localStyles.buttons}
             onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
             underlayColor={'#68a0ff'} >
 
-            <Text style={localStyles.buttonText}>AR</Text>
+            <Text style={localStyles.buttonText}>Begin Tour</Text>
           </TouchableHighlight>
 
-          <TouchableHighlight style={localStyles.buttons}
+          {/* <TouchableHighlight style={localStyles.buttons}
             onPress={this._getExperienceButtonOnPress(VR_NAVIGATOR_TYPE)}
             underlayColor={'#68a0ff'} >
 
             <Text style={localStyles.buttonText}>VR</Text>
-          </TouchableHighlight>
+          </TouchableHighlight> */}
         </View>
       </View>
     );
@@ -138,19 +135,19 @@ export default class ViroSample extends Component {
 var localStyles = StyleSheet.create({
   viroContainer :{
     flex : 1,
-    backgroundColor: "black",
+    backgroundColor: "white",
   },
   outer : {
     flex : 1,
     flexDirection: 'row',
     alignItems:'center',
-    backgroundColor: "black",
+    backgroundColor: "white",
   },
   inner: {
     flex : 1,
     flexDirection: 'column',
     alignItems:'center',
-    backgroundColor: "black",
+    backgroundColor: "white",
   },
   titleText: {
     paddingTop: 30,
