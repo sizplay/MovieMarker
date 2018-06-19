@@ -8,8 +8,6 @@ import {
   ViroARScene,
   ViroText,
   ViroImage,
-  Viro3DObject,
-  ViroARPlaneSelector,
   ViroConstants,
 } from 'react-viro';
 
@@ -82,11 +80,12 @@ export default class HelloWorldSceneAR extends Component {
       <ViroARScene onTrackingUpdated={this._onInitialized} >
         <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} />
         <ViroImage
-            position={[0, 0, -1]}
+            position={[0, 1, -1]}
             height={2}
             width={2}
-            //placeholderSource={require("./res/guadalupe_360.jpg")}
-            source={require("./res/guadalupe_360.jpg")}
+            placeholderSource={require("./res/guadalupe_360.jpg")}
+            //source={require("./res/guadalupe_360.jpg")}
+            source={require("./res/MovieMarkerLogo.png")}
         />
       </ViroARScene>
     );
