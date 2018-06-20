@@ -28,8 +28,8 @@ var sharedProps = {
 };
 
 // Sets the default scene you want for AR and VR
-var InitialARScene = require('./js/HelloWorldSceneAR');
-var InitialVRScene = require('./js/HelloWorldScene');
+var InitialARScene = require('./js/LocalTour');
+var InitialVRScene = require('./js/MovieTour');
 
 var UNSET = 'UNSET';
 var VR_NAVIGATOR_TYPE = 'VR';
@@ -71,7 +71,7 @@ export default class ViroSample extends Component {
       <View style={localStyles.outer} >
         <View style={localStyles.inner} >
           <Image
-            style={{ alignSelf: 'center', width: 250, height: 180, marginBottom: 0 }}
+            style={{ alignSelf: 'center', width: 250, height: 180, marginBottom: 50 }}
             source={require('./js/res/MovieMarkerLogo.png')}
           />
           <TouchableHighlight

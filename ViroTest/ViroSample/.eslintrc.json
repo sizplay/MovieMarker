@@ -1,0 +1,14 @@
+{
+  "extends": "fullstack",
+  "parser": "babel-eslint",
+  "rules": {
+    "semi": [1, "always"],
+    "complexity": [0],
+    "camelcase": 0,
+    "jsx-quotes": [1, "prefer-single"],
+    "id-length": [0],
+    "react/jsx-closing-tag-location": 0,
+    "default-case": 0,
+    "function-paren-newline": 0
+  }
+}
