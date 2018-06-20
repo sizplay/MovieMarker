@@ -71,7 +71,7 @@ export default class ViroSample extends Component {
       <View style={localStyles.outer} >
         <View style={localStyles.inner} >
           <Image
-            style={{ alignSelf: 'center', width: 250, height: 180, marginBottom: 0 }}
+            style={{ alignSelf: 'center', width: 250, height: 180, marginBottom: 50 }}
             source={require('./js/res/MovieMarkerLogo.png')}
           />
           <TouchableHighlight

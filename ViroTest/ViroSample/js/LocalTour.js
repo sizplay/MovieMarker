@@ -19,16 +19,29 @@ export default class HelloWorldSceneAR extends Component {
       text: 'Initializing AR...',
       lat: '',
       lon: '',
-      points: []
+      points: [],
+      error: ''
     };
-    this._onInitialized = this._onInitialized.bind(this);
+    this.getLocations = this.getLocations.bind(this);
   }
 
-  _onInitialized(state) {
+  componentDidMount() {
+    this.watchId = navigator.geolocation.watchPosition(
+      this.getLocations,
+      (error) => this.setState({ error: error.message }),
+      { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000, distanceFilter: 1 },
+    );
+  }
+
+  componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.watchId);
+  }
+
+  getLocations(state) {
     const success = (pos) => {
-      const crd = pos.coords;
-      const lat = crd.latitude.toFixed(6);
-      const lon = crd.longitude.toFixed(6);
+      const coords = pos.coords;
+      const lat = coords.latitude.toFixed(6);
+      const lon = coords.longitude.toFixed(6);
       // fetch(`https://api.tomtom.com/search/2/nearbySearch/.JSON?key=X00cnasclWOj31PE35FcEmTYJO7TEAYl&lat=${lat}&lon=${lon}&radius=50`)
       fetch(`https://api.tomtom.com/search/2/nearbySearch/.JSON?key=X00cnasclWOj31PE35FcEmTYJO7TEAYl&lat=40.728157&lon=-73.957797&radius=50`)
         .then(result => {
@@ -59,9 +72,9 @@ export default class HelloWorldSceneAR extends Component {
   render() {
     const { lat, lon } = this.state;
     return (
-      <ViroARScene onTrackingUpdated={this._onInitialized} >
+      <ViroARScene onTrackingUpdated={this.getLocations} >
         {
-          this.state.points.map((point, index) => {
+          this.state.points.map((point) => {
             const measure = (lat1, lon1, lat2, lon2) => {
               const R = 6378.137;
               const dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
@@ -74,7 +87,7 @@ export default class HelloWorldSceneAR extends Component {
                 Math.sin(dLon / 2);
               const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
               const d = R * c;
-              return d * 1000;
+              return d * 100;
             };
 
             let Z = measure(lat, lon, point.position.lat, lon);
@@ -92,7 +105,7 @@ export default class HelloWorldSceneAR extends Component {
               key={point.id}
               text={point.poi.name}
               scale={[0.5, 0.5, 0.5]}
-              position={[0, -1, -index]}
+              position={[X, -1, Z]}
               style={styles.text}
             />);
           })
