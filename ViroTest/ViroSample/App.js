@@ -8,6 +8,7 @@
  */
 
 import React, { Component } from 'react';
+import MapScreen from './Map';
 import {
   AppRegistry,
   Text,
@@ -70,6 +71,7 @@ export default class ViroSample extends Component {
     return (
       <View style={localStyles.outer} >
         <View style={localStyles.inner} >
+         {/* <Map /> */}
           <Image
             style={{ alignSelf: 'center', width: 250, height: 180, marginBottom: 50 }}
             source={require('./js/res/MovieMarkerLogo.png')}
