@@ -20,6 +20,7 @@ export default class HelloWorldSceneAR extends Component {
       lat: '',
       lon: '',
       points: [],
+      logo: true,
       error: ''
     };
     this.getLocations = this.getLocations.bind(this);
@@ -31,6 +32,9 @@ export default class HelloWorldSceneAR extends Component {
       (error) => this.setState({ error: error.message }),
       { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000, distanceFilter: 1 },
     );
+    setTimeout(() => {
+      this.setState({ logo: false });
+    }, 30000);
   }
 
   componentWillUnmount() {
@@ -70,7 +74,7 @@ export default class HelloWorldSceneAR extends Component {
   }
 
   render() {
-    const { lat, lon } = this.state;
+    const { lat, lon, logo, text } = this.state;
     return (
       <ViroARScene onTrackingUpdated={this.getLocations} >
         {
@@ -93,7 +97,7 @@ export default class HelloWorldSceneAR extends Component {
             let Z = measure(lat, lon, point.position.lat, lon);
             let X = measure(lat, lon, lat, point.position.lon);
 
-            if (lat < point.position.lat) {
+            if (lat > point.position.lat) {
               X = -X;
             }
 
@@ -110,13 +114,14 @@ export default class HelloWorldSceneAR extends Component {
             />);
           })
         }
-        <ViroText text={this.state.text} scale={[0.5, 0.5, 0.5]} position={[0, -2, -2]} style={styles.text} />
+        <ViroText text={text} scale={[0.5, 0.5, 0.5]} position={[0, -2, -2]} style={styles.text} />
         <ViroImage
           position={[0, 0.5, -2]}
           height={2}
           width={2}
           placeholderSource={require('./res/MovieMarkerLogo.png')}
           source={require('./res/MovieMarkerLogo.png')}
+          visible={logo}
         />
         <ViroImage
           position={[2, 1, -2]}
