@@ -13,17 +13,12 @@ import {
 
 
 export default class HelloWorldSceneAR extends Component {
-
   constructor() {
     super();
-
-    // Set initial state here
     this.state = {
-      text: "Initializing mARco...",
+      text: 'Initializing AR...',
       points: []
     };
-
-    // bind 'this' to functions
     this._onInitialized = this._onInitialized.bind(this);
   }
 
@@ -59,28 +54,26 @@ export default class HelloWorldSceneAR extends Component {
     }
   }
 
-
-
   render() {
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized} >
         {
-          this.state.points.map((point, index) => <ViroText key={point.id} text={point.poi.name} scale={[.5, .5, .5]} position={[0, 0, index]} style={styles.helloWorldTextStyle} />)
+          this.state.points.map((point, index) => <ViroText key={point.id} text={point.poi.name} scale={[0.5, 0.5, 0.5]} position={[0, 0, index]} style={styles.helloWorldTextStyle} />)
         }
-        <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, -2, -2]} style={styles.helloWorldTextStyle} />
+        <ViroText text={this.state.text} scale={[0.5, 0.5, 0.5]} position={[0, -2, -2]} style={styles.helloWorldTextStyle} />
         <ViroImage
-          position={[0, .5, -2]}
+          position={[0, 0.5, -2]}
           height={2}
           width={2}
-          placeholderSource={require("./res/MovieMarkerLogo.png")}
-          source={require("./res/MovieMarkerLogo.png")}
+          placeholderSource={require('./res/MovieMarkerLogo.png')}
+          source={require('./res/MovieMarkerLogo.png')}
         />
         <ViroImage
           position={[2, 1, -2]}
           height={2}
           width={2}
-          placeholderSource={require("./res/StayPuff.jpg")}
-          source={require("./res/StayPuff.jpg")}
+          placeholderSource={require('./res/StayPuff.jpg')}
+          source={require('./res/StayPuff.jpg')}
         />
       </ViroARScene>
     );
@@ -98,62 +91,3 @@ var styles = StyleSheet.create({
 });
 
 module.exports = HelloWorldSceneAR;
-
-
-
-// 'use strict';
-
-// import React, { Component } from 'react';
-// import {StyleSheet} from 'react-native';
-// import {
-//   ViroARScene,
-//   ViroText,
-//   ViroMaterials,
-//   ViroBox,
-//   Viro3DObject,
-//   ViroAmbientLight,
-//   ViroSpotLight,
-//   ViroARPlaneSelector,
-//   ViroNode,
-//   ViroAnimations,
-// } from 'react-viro';
-// var createReactClass = require('create-react-class');
-// var HelloWorldSceneAR = createReactClass({
-//   getInitialState() {
-//     return {
-//       text : "Initializing AR..."
-//     };
-//   },
-
-//   render: function() {
-//     return (
-//       <ViroARScene onTrackingInitialized={()=>{this.setState({text : "Hello World!"})}}>
-//         <ViroText text={this.state.text} scale={[.1, .1, .1]} height={1} width={4} position={[0, .5, -1]} style={styles.helloWorldTextStyle} />
-
-//         <ViroAmbientLight color={"#aaaaaa"} />
-//         <ViroSpotLight innerAngle={5} outerAngle={90} direction={[0,-1,-.2]} position={[0, 3, 1]} color="#ffffff" castsShadow={true} />
-
-//           <Viro3DObject
-//             source={require('./res/emoji_smile/emoji_smile.vrx')}
-//             position={[0, 0, -1]}
-//             scale={[.2, .2, .2]}
-//             type="VRX"
-//             dragType="FixedDistance" onDrag={()=>{}}
-//           />
-
-//       </ViroARScene>
-//     );
-//   },
-// });
-
-// var styles = StyleSheet.create({
-//   helloWorldTextStyle: {
-//     fontFamily: 'Arial',
-//     fontSize: 50,
-//     color: '#ffffff',
-//     textAlignVertical: 'center',
-//     textAlign: 'center',
-//   },
-// });
-
-// module.exports = HelloWorldSceneAR;

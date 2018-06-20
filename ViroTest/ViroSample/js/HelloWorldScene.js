@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import {
   ViroScene,
@@ -11,22 +11,19 @@ import {
 } from 'react-viro';
 
 export default class HelloWorldScene extends Component {
-
   constructor() {
     super();
-
-    this.state = {} // Set initial state here
+    this.state = {};
   }
 
   render() {
     return (
       <ViroScene>
         <Viro360Image source={require('./res/guadalupe_360.jpg')} />
-        <ViroText text="Hello Marco!" width={2} height={2} position={[0, 0, -2]} style={styles.helloWorldTextStyle} />
+        <ViroText text='Hello Marco!' width={2} height={2} position={[0, 0, -2]} style={styles.helloWorldTextStyle} />
       </ViroScene>
     );
   }
-
 }
 
 var styles = StyleSheet.create({
