@@ -4,9 +4,12 @@ Movie Marker is an interactive AR (Augmented Reality) tour using your mobile dev
 
 ## Team
 
-- [@sizplay](https://github.com/sizplay)
-- [@aflemi2](http://www.github.com/aflemi2)
-- [@marcopchen](http://www.github.com/marcopchen)
+- [@sizplay](https://github.com/sizplay) - Chaehoon Lim
+- [@aflemi2](http://www.github.com/aflemi2) - Alan Fleming
+- [@marcopchen](http://www.github.com/marcopchen) - Marco Chen
+
+## Demo
+https://streamable.com/edit/7atom
 
 ## Technologies
 
