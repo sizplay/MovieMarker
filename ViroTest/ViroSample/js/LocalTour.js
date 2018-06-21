@@ -9,8 +9,10 @@ import {
   ViroText,
   ViroImage,
   ViroConstants,
+  ViroSceneNavigator
 } from 'react-viro';
 
+import App from '../App.js';
 
 export default class HelloWorldSceneAR extends Component {
   constructor() {
@@ -24,6 +26,7 @@ export default class HelloWorldSceneAR extends Component {
       error: ''
     };
     this.getLocations = this.getLocations.bind(this);
+    this.goHome = this.goHome.bind(this);
   }
 
   componentDidMount() {
@@ -34,7 +37,7 @@ export default class HelloWorldSceneAR extends Component {
     );
     setTimeout(() => {
       this.setState({ logo: false });
-    }, 30000);
+    }, 15000);
   }
 
   componentWillUnmount() {
@@ -46,8 +49,8 @@ export default class HelloWorldSceneAR extends Component {
       const coords = pos.coords;
       const lat = coords.latitude.toFixed(6);
       const lon = coords.longitude.toFixed(6);
-      // fetch(`https://api.tomtom.com/search/2/nearbySearch/.JSON?key=X00cnasclWOj31PE35FcEmTYJO7TEAYl&lat=${lat}&lon=${lon}&radius=50`)
-      fetch(`https://api.tomtom.com/search/2/nearbySearch/.JSON?key=X00cnasclWOj31PE35FcEmTYJO7TEAYl&lat=40.728157&lon=-73.957797&radius=50`)
+      fetch(`https://api.tomtom.com/search/2/nearbySearch/.JSON?key=X00cnasclWOj31PE35FcEmTYJO7TEAYl&lat=${lat}&lon=${lon}&radius=50`)
+      // fetch(`https://api.tomtom.com/search/2/nearbySearch/.JSON?key=X00cnasclWOj31PE35FcEmTYJO7TEAYl&lat=40.728157&lon=-73.957797&radius=50`)
         .then(result => {
           return result.json();
         })
@@ -73,10 +76,18 @@ export default class HelloWorldSceneAR extends Component {
     }
   }
 
+  goHome() {
+    return (
+      <ViroSceneNavigator
+        apiKey='5F3CA074-4C72-4021-8583-144C84A7AA26'
+        initialScene={{ scene: App }} />
+    );
+  }
+
   render() {
     const { lat, lon, logo, text } = this.state;
     return (
-      <ViroARScene onTrackingUpdated={this.getLocations} >
+      <ViroARScene onClick={this.goHome} onTrackingUpdated={this.getLocations} >
         {
           this.state.points.map((point) => {
             const measure = (lat1, lon1, lat2, lon2) => {
@@ -129,6 +140,41 @@ export default class HelloWorldSceneAR extends Component {
           width={2}
           placeholderSource={require('./res/StayPuff.jpg')}
           source={require('./res/StayPuff.jpg')}
+        />
+        <ViroImage
+          position={[-2, 1, -4]}
+          height={2}
+          width={2}
+          placeholderSource={require('./res/DieHard.jpg')}
+          source={require('./res/DieHard.jpg')}
+        />
+        <ViroImage
+          position={[2, 1, -5]}
+          height={2}
+          width={2}
+          placeholderSource={require('./res/HomeAlone.jpg')}
+          source={require('./res/HomeAlone.jpg')}
+        />
+        <ViroImage
+          position={[-3, 1, -10]}
+          height={2}
+          width={2}
+          placeholderSource={require('./res/TMNT.jpg')}
+          source={require('./res/TMNT.jpg')}
+        />
+        <ViroImage
+          position={[2, 1, -5]}
+          height={2}
+          width={2}
+          placeholderSource={require('./res/Warriors.jpg')}
+          source={require('./res/Warriors.jpg')}
+        />
+        <ViroImage
+          position={[0, 1, -8]}
+          height={2}
+          width={2}
+          placeholderSource={require('./res/YouveGotMail.jpg')}
+          source={require('./res/YouveGotMail.jpg')}
         />
       </ViroARScene>
     );
