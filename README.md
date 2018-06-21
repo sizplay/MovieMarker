@@ -12,7 +12,7 @@ Movie Marker is an interactive augmented reality (AR) tour using your mobile dev
 https://streamable.com/edit/7atom
 
 ## Award
-Winner of the "Tour around the City with Augmented Reality" challenge sponsored by TomTom at DeveloperWeek NY 2018
+- Winner of the "Tour with Augmented Reality" challenge sponsored by TomTom at the DeveloperWeek NY 2018 hackathon
 ![Winner](https://i.imgur.com/QO8wyp0.jpg "Winner")
 
 ## Technologies
