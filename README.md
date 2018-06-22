@@ -18,6 +18,7 @@ Winner of the "Tour with Augmented Reality" challenge from TomTom at the Develop
 ## Technologies
 
 The Movie Marker app is built using React Native and Viro-React. We utilize the TomTom API to search nearby locations and set the markers for the user to find.
+![Screenshot](screenshot.png)
 
 ### API
 
