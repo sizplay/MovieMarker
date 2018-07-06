@@ -1,7 +1,7 @@
 # Movie Marker
 ![Logo](MovieMarkerLogo.png)
 
-Movie Marker is an interactive augmented reality (AR) tour using your mobile device. Using the TomTom API, a tour will lead you through the city and reveal different locations where famous movies were filmed. Based on your location you will see a movie scene overlay with Viro AR. 
+Movie Marker is an interactive augmented reality (AR) tour using your mobile device. Using the TomTom API, a tour will lead you through the city and reveal different locations where famous movies were filmed. Based on your location you will see a movie scene overlay with Viro AR. http://accelerate.im/projects/1154
 
 ## Team
 
